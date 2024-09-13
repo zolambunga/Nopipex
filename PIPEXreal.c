@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PIPEXreal.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zombunga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/13 09:06:33 by zombunga          #+#    #+#             */
+/*   Updated: 2024/09/13 09:10:01 by zombunga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <sys/wait.h>
 #include "Libft/libft.h"
@@ -26,9 +38,9 @@ void	execute(const char *cmd)
 void	child_process(const char *cmd, const char *file, int *fd)
 {
 	int	file_fd;
-	char r[10];
 
-	if ((file_fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
+	file_fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (file_fd < 0)
 		error("\033[31mUnable to open file\033[0m");
 	if (dup2(fd[0], STDIN_FILENO) < 0 || dup2(file_fd, STDOUT_FILENO) < 0)
 		error("\033[31mDup2 son failed!\033[0m");
@@ -42,7 +54,8 @@ void	parent_process(const char *file, const char *cmd, int *fd)
 {
 	int	file_fd;
 
-	if ((file_fd = open(file, O_RDONLY, 0644)) < 0)
+	file_fd = open(file, O_RDONLY, 0644);
+	if (file_fd < 0)
 		error("\033[31mUnable to open file\033[0m");
 	if (dup2(fd[1], STDOUT_FILENO) < 0 || dup2(file_fd, STDIN_FILENO) < 0)
 		error("\033[31mDup2 failed!\003[0m");
@@ -54,12 +67,12 @@ void	parent_process(const char *file, const char *cmd, int *fd)
 
 int	main(int ac, char **av)
 {
-	int	fd[2];
+	int		fd[2];
 	pid_t	pid;
 
 	if (ac == 5)
 	{
-		if(pipe(fd) < 0)
+		if (pipe(fd) < 0)
 			error("\033[31mPipe failed!\033[0m");
 		pid = fork();
 		if (pid < 0)

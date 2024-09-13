@@ -22,6 +22,7 @@ all: ${NAME}
 ${NAME}:${OBJS}
 	@make re -C ${DIR}
 	@${CC} ${CFLAGS} ${SRC} ./libft/libft.a -o ${NAME}
+	@printf "\033c"
 	@echo "\033[32mBinary\033[33m pipex\033[32m succesfully created\033[0m"
 
 ${OBJS} : ${SRC}
@@ -30,11 +31,13 @@ ${OBJS} : ${SRC}
 clean:
 	@make clean -C ${DIR}
 	@rm -rf ${OBJS}
+	@printf "\033c"
 	@echo "\033[32mSuccesfully cleaned!\033[0m"
 
 fclean: clean
 	@make fclean -C ${DIR}
 	@rm -rf ${NAME}
-	@echo "\033[32mBinary\033[33m pipex\033[32m succesfully \033[31mdeleted\033[0m"
+	@printf "\033c"
+	@echo "\033[32mBinary and objects\033[33m pipex\033[32m succesfully \033[31mdeleted\033[0m"
 
 re: fclean all

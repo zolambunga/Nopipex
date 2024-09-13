@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PIPEXreal.c                                        :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zombunga <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 09:06:33 by zombunga          #+#    #+#             */
-/*   Updated: 2024/09/13 09:10:01 by zombunga         ###   ########.fr       */
+/*   Created: 2024/08/30 09:06:33 by zombunga          #+#    #+#             */
+/*   Updated: 2024/09/13 15:27:01 by zombunga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include <fcntl.h>
-#include <sys/wait.h>
 
 void	error(const char *str, int can_exit_now)
 {
@@ -92,5 +91,7 @@ int	main(int ac, char **av)
 		else
 			parent_process(av[1], av[2], fd);
 	}
+	else
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

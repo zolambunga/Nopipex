@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: zombunga <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/09/13 13:53:49 by zombunga          #+#    #+#              #
+#    Updated: 2024/09/13 13:53:54 by zombunga         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRCS = ft_memset.c		\
 		ft_bzero.c		\
 		ft_memcpy.c		\
@@ -61,23 +73,24 @@ CC_FLAGS = -Wall -Wextra -Werror
 $(OBJS_DIR)%.o : %.c libft.h
 	@mkdir -p $(OBJS_DIR)
 	@echo "Compiling: $<"
-	$(CC) $(CC_FLAGS) -c $< -o $@
+	@$(CC) $(CC_FLAGS) -c $< -o $@
+	@printf "\033c"
 
 $(NAME): $(OBJECTS_PREFIXED)
-	ar rcs $(NAME) $(OBJECTS_PREFIXED)
-	@echo "Libft Done !"
+	@ar rcs $(NAME) $(OBJECTS_PREFIXED)
+	@echo "\033[32mLibft Done !\033[0m"
 
 all: $(NAME)
 
 clean:
-	rm -rf $(OBJS_DIR)
+	@rm -rf $(OBJS_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
 bonus: $(OBJECTS_BONUS_PREFIXED)
-	ar rcs $(NAME) $(OBJECTS_BONUS_PREFIXED)
+	@ar rcs $(NAME) $(OBJECTS_BONUS_PREFIXED)
 	@echo "Libft Bonus Done !"
 
